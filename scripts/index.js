@@ -1,65 +1,81 @@
 "use strict"
 
-/*
-    - An ice cream cone or cup with one scoop costs $2.25
-    
-        - Each additional scoop of ice cream is $1.25
-
-    - ONLY THE CUPS CAN HAVE THE TOPPINGS. Meaning that i will 
-      need to hide and show the topping section when the radio 
-      buttons for cone and cup are clicked.
-
-
-
-
-*/
-console.log("hello?.. are you there?")
-
 window.onload = function () {
 
     let theForm = document.querySelector("#theForm");
 
-    theForm.addEventListener("submit", calcIceCreamFees);
+
+    let coneOrCupRadios = document.querySelectorAll("input[name='coneOrCup']");
+
+    theForm.addEventListener("submit", calcTotal);
+
+    coneOrCupRadios.forEach(function (radio) {
+        radio.addEventListener("click", hideShowToppings);
+    })
+
 }
 
-function calcIceCreamFees(event) {
-    // this will prevent the form submitting and refreshing the page
-    event.preventDefault();
+function calcTotal(event) {
+    event.preventDefault()
 
-
-    let baseCost = 2.25;
-
-    let theForm = event.target();
-
-    let numScoops = parseInt(theForm.numScoops.value);
-
-    let totalCost = baseCost + numScoops * 1.25;
+    // this get data from form
+    let theForm = event.target;
 
 
 
-    if (theForm.coneOrCup === "cup") {
+    // number of scoops
+    let numScoops = theForm.numScoops.value;
+    // ice cream base price
+    let iceCreamTotal = 2.25;
 
+    if (numScoops > 1) {
+        iceCreamTotal += (numScoops - 1) * 1.25;
+    }
+    // toppings
+    if (theForm.coneOrCup.value === "cup") {
 
-
-
-        // this will handle the toppings cost
-        let optionsCost = 0;
         if (theForm.sprinkles.checked) {
-            optionsCost += .50;
+            iceCreamTotal += .50;
         }
 
         if (theForm.whippedCream.checked) {
-            optionsCost += .25;
+            iceCreamTotal += .25;
         }
 
         if (theForm.hotFudge.checked) {
-            optionsCost += 1.25;
+            iceCreamTotal += 1.25;
         }
 
         if (theForm.cherry.checked) {
-            optionsCost += .25;
+            iceCreamTotal += .25;
         }
-
     }
+        // additonal scoops price
+    // the tax amount
+    let taxAmount = iceCreamTotal * (7 / 100);
+    // dont forget thee divv!!
+    let message = `
+            <div>Ice Cream Price: $${iceCreamTotal.toFixed(2)}</div>
+            <div>Tax: $${taxAmount.toFixed(2)}</div>
+            <div>Total Due: $${(iceCreamTotal + taxAmount).toFixed(2)}</div>
+        `
+
+    document.querySelector("#results").innerHTML = message;
+
+}
+// this should hide the topping when selecting cone hopefully. woooo it works ty google!!!
+function hideShowToppings(event) {
+
+    let toppingsSect = document.querySelector("#toppings");
+
+    if (event.target.value === "cup") {
+
+        toppingsSect.style.display = "block";
+
+
+    } else {
+        toppingsSect.style.display = "none";
+    }
+
 
 }

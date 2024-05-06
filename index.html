@@ -10,10 +10,10 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-image: linear-gradient(180deg, #FEE140, #FA709A); background-attachment: fixed;">
 
     <header>
-        <h1 style="text-align: center; margin-top: 25px; ">Order Ice Cream</h1>
+        <h1 style="text-align: center; margin-top: 25px;" class="display-4">Order Ice Cream</h1>
     </header>
 
 
@@ -24,6 +24,7 @@
                 <label for="numScoops">Number of Scoops:</label>
                 <input id="numScoops" name="numScoops" type="number" min="1" max="4" required>
             </div>
+            <div>Additional scoops are $1.25 each!!</div>
             <div class="mb-3">
                 <input type="radio" name="coneOrCup" id="coneOrCup" value="cone" checked>
                 <label for="coneOrCup">Cone</label>
@@ -31,7 +32,7 @@
                 <label for="coneOrCup">Cup</label>
             </div>
             <section class="my-3 w-50" id="toppings" style="margin-left: 24rem;">
-                <h4>Toppings</h4>
+                <h4 class="display-6">Toppings</h4>
                 <div class="border border-bottom-0 border-dark">
                     <input id="sprinkles" name="sprinkles" type="checkbox">
                     <label for="sprinkles">Sprinkles ($.50)</label>
@@ -45,7 +46,7 @@
                     <label for="cherry">Cherry ($0.25)</label>
                 </div>
             </section>
-            <button>Submit Order</button>
+            <button class="btn btn-primary">Submit Order</button>
         </form>
 
         <!-- Div that will hold the output of the rental car estimator -->
